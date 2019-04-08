@@ -1,12 +1,21 @@
 #!/bin/bash
 
+# Make sure aliases are loaded
+if [[ -f "$HOME/.aliases" ]]; then
+  source "$HOME/.aliases"
+fi
+
 # Make sure .bashrc is loaded.
-source ~/.bashrc
+if [[ -f "$HOME/.bashrc" ]]; then
+  source "$HOME/.bashrc"
+fi
+
 # Increase history size
 export HISTSIZE=10000
 
 # Program configs
 export GREP_OPTIONS="$GREP_OPTIONS --color=auto"
+
 # Up / Down arrow key for history search
 bind '"\e[A": history-search-backward'
 bind '"\e[B": history-search-forward'
@@ -48,29 +57,15 @@ function wsx() {
   ws "$workDir" && eval "$@" && cd $oldPath
 }
 
-function myip() {
-  curl -s checkip.dyndns.org | sed -e 's/.*Current IP Address: //' -e 's/<.*$//'
-}
-
 # Delete all merged branches
 # https://stackoverflow.com/a/6127884/2777153
 function git-remote-merged() {
   git branch --merged | egrep -v "(^\*|master|review)" | xargs git branch -d
 }
 
-export PATH="/usr/local/opt/php@7.1/bin:$PATH"
-export PATH="/usr/local/opt/php@7.1/sbin:$PATH"
-
-if [ -d "$HOME/adb-fastboot/platform-tools" ] ; then
- export PATH="$HOME/adb-fastboot/platform-tools:$PATH"
-fi
+export BASH_IT="$HOME/.bash_it"
 
 GO111MODULE=on
-
-export PATH="$HOME/.cargo/bin:$PATH"
-
-# Path to the bash it configuration
-export BASH_IT="/Users/kevingimbel/.bash_it"
 
 # custom function for powerline
 source ~/.bash_it_custom/powerline-multiline/custom-prompt-funcs.sh

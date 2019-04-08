@@ -1,0 +1,70 @@
+#!/usr/bin/env bash
+
+#
+# Custom aliases
+#
+# Usage: 
+# 
+# if [[ -f "$HOME/.aliases" ]]; then
+#   source "$HOME/.aliases"
+# fi
+#
+
+# Load "secret" aliases
+if [[ -f "$HOME/.aliases-secrets" ]]; then
+  source "$HOME/.aliases-secrets"
+fi
+
+alias atom="atom-beta"
+alias magerun="docker-compose run --rm magerun"
+
+# git aliases
+if [[ -f "$HOME/dotfiles/.gitalias" ]]; then
+source "$HOME/dotfiles/.gitalias"
+fi
+
+
+# Language Settings
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+
+# environment settings
+# Go Settings
+export GOPATH="$HOME/Development/go"
+
+# Magefile verbose mode
+export MAGE_VERBOSE=1
+
+# Ruby Settings
+export GEM_HOME="/Users/kevingimbel/.gem"
+
+# Node Settings
+export NODE_PATH="$(npm get prefix)/lib/node-modules"
+
+# Path
+export PATH="$PATH:$GEM_HOME/bin"
+export PATH="$PATH:$HOME/Development/go/bin"
+export PATH="$PATH:$HOME/bin"
+export PATH="/usr/local/sbin:$PATH"
+export PATH="/Users/kevingimbel/Library/Python/3.7/bin:$PATH"
+
+export PATH="/usr/local/opt/php@7.1/bin:$PATH"
+export PATH="/usr/local/opt/php@7.1/sbin:$PATH"
+
+export PATH="$HOME/.cargo/bin:$PATH"
+# tiny-care-terminal config
+export TTC_BOTS='tinycarebot,selfcare_bot,magicrealismbot'
+export TTC_SAY_BOX='cat'
+export TTC_REPOS='~/Development/synoa/,~/Development/go/src/github.com/'
+export TTC_REPOS_DEPTH=3
+export TTC_GITBOT='gitlog'
+export TTC_WEATHER='Wiesbaden,Germany'
+export TTC_APIKEYS=false
+export TTC_UPDATE_INTERVAL=20
+
+# Source this file to setup the environment for usage with AWS CLI tools
+# Disabled because AWS_PROFILE cannot be set when this is set. :shrug:
+# export AWS_ACCESS_KEY_ID=$(aws configure get aws_access_key_id)
+# export AWS_SECRET_ACCESS_KEY=$(aws configure get aws_secret_access_key)
+
+alias kcsys="kubectl --namespace kube-system"
