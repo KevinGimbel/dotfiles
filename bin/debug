@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+set -e
+
+if [ "$EUID" -eq 0 ]; then
+  echo "For security reasons this script cannot be executed as root user."
+  exit 1
+fi 
+
+log_date=$(date +%y%m%d-%H%M%S)
+log_file=" $1-$log_date.log"
+
+eval "$@"  >> $log_file
+
+exit $?

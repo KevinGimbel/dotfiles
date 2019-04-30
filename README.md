@@ -1,6 +1,17 @@
 # dotfiles
 > Bash configuration files
 
+## Table of Contents
+* [Usage](#usage)
+* [Custom Functions](#custom-functions)
+  * [debug](#debug)
+* [Custom Functions](#custom-functions-in-bash_profile)
+  * [ws](#ws)
+  * [wsx](#wsx)
+  * [Kubernetes Context](#kubernetes-context)
+* [Recommended tools](#recommended-tools)
+  * [fd](#fd)
+  * [jq](#jq)
 ## Usage
 
 Install bash-it, see [https://github.com/Bash-it/bash-it](https://github.com/Bash-it/bash-it) for instructions.
@@ -12,6 +23,27 @@ cp .bash_profile $HOME
 ```
 
 ## Custom Functions
+
+Inside the `bin` directory are some custom scripts that can be linked or copied to `$HOME/bin` or any other bin directory in your `$PATH`, e.g. `/usr/local/bin`.
+
+### debug
+
+This function pipes all output of a shell script into a log file named `$command-$date.log`, where `$command` is the executed command (`$1`) and `$date` is the date in the format `%y%m%d-%H%M%S` (e.g. for April 30th, 2019 at 09:17am it would be 20190330-091734).
+
+Syntax
+```sh
+$ debug [command] [...args]
+```
+
+Usage
+
+```sh
+$ debug echo "Hello world"
+$ cat echo-20190330-091734.log
+Hello world
+```
+
+## Custom Functions in `.bash_profile`
 
 ### `ws`
 

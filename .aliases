@@ -23,6 +23,10 @@ if [[ -f "$HOME/dotfiles/.gitalias" ]]; then
 source "$HOME/dotfiles/.gitalias"
 fi
 
+# hcloud completion
+source <(hcloud completion bash) 
+# kubectl
+source <(kubectl completion bash)
 
 # Language Settings
 export LC_ALL=en_US.UTF-8
