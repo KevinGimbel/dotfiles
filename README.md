@@ -15,6 +15,7 @@
 
 ## Usage
 [🔝 Back to top](#table-of-contents)
+
 Install bash-it, see [https://github.com/Bash-it/bash-it](https://github.com/Bash-it/bash-it) for instructions.
 
 Copy files to `$HOME`.
@@ -25,10 +26,12 @@ cp .bash_profile $HOME
 
 ## Custom Functions
 [🔝 Back to top](#table-of-contents)
+
 Inside the `bin` directory are some custom scripts that can be linked or copied to `$HOME/bin` or any other bin directory in your `$PATH`, e.g. `/usr/local/bin`.
 
 ### debug
 [🔝 Back to top](#table-of-contents)
+
 This function pipes all output of a shell script into a log file named `$command-$date.log`, where `$command` is the executed command (`$1`) and `$date` is the date in the format `%y%m%d-%H%M%S` (e.g. for April 30th, 2019 at 09:17am it would be 20190330-091734).
 
 Syntax
