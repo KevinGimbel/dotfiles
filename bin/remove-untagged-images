@@ -1,0 +1,46 @@
+#!/bin/sh
+
+untagged="$(docker images | grep '<none>' | awk -F' ' '{ print $3 }')"
+
+main() {
+  # Print out we found images and list them
+  echo "Found untagged images."
+  docker images | grep "<none>"
+  echo ""
+  # Ask if they should be removed
+  echo "Remove untagged images? [Y/n]"
+  # Get the shell input into the variable 'answer'
+  read answer
+
+  # switch through the answer. Default is no action
+  case $answer in
+    'Y')
+      # if the answer is 'Y', remove the images
+      docker rmi $untagged
+      ;;
+
+    'n')
+      echo "Aborting."
+      exit 1
+      ;;
+
+    *)
+      echo "Unknown answer: $answer"
+      exit 1
+  esac
+
+  # check if docker rmi exited with 0 or not
+  if [ $? -ne 0 ]; then
+    echo "$?"
+    echo "Error: Unable to remove images. See docker error logs above."
+  else
+    echo "Images removed."
+  fi
+}
+
+# Call the main function if we untagged images
+if [ ! -z "$untagged" ]; then
+  main
+else
+  echo "No untagged images found."
+fi

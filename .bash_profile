@@ -59,7 +59,7 @@ function wsx() {
 
 # Delete all merged branches
 # https://stackoverflow.com/a/6127884/2777153
-function git-remote-merged() {
+function git-remove-merged() {
   git branch --merged | egrep -v "(^\*|master|review)" | xargs git branch -d
 }
 
@@ -73,8 +73,16 @@ source ~/.bash_it_custom/powerline-multiline/custom-prompt-funcs.sh
 # Leave empty to disable theming.
 # location /.bash_it/themes/
 export BASH_IT_THEME='powerline-multiline'
-export POWERLINE_LEFT_PROMPT="scm cwd_short"
-export POWERLINE_RIGHT_PROMPT="python_venv kubectl_context aws_profile clock user_info"
+
+if [ "$TERM_PROGRAM" = "iTerm.app" ]; then
+  export PS1_KUBECTL=1
+  export POWERLINE_LEFT_PROMPT="clock aws_profile kubectl_context python_venv"
+  export POWERLINE_RIGHT_PROMPT=
+else
+  export POWERLINE_LEFT_PROMPT="scm cwd_short"
+  export POWERLINE_RIGHT_PROMPT=""
+fi
+
 export POWERLINE_PROMPT_CHAR="λ"
 # (Advanced): Change this to the name of your remote repo if you
 # cloned bash-it with a remote other than origin such as `bash-it`.

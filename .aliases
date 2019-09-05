@@ -72,3 +72,25 @@ export TTC_UPDATE_INTERVAL=20
 # export AWS_SECRET_ACCESS_KEY=$(aws configure get aws_secret_access_key)
 
 alias kcsys="kubectl --namespace kube-system"
+
+export PATH="$PATH:/Users/kevingimbel/Development/github/emsdk"
+export PATH="$PATH:/Users/kevingimbel/Development/github/emsdk/clang/e1.38.5_64bit"
+export PATH="$PATH:/Users/kevingimbel/Development/github/emsdk/node/8.9.1_64bit/bin"
+export PATH="$PATH:/Users/kevingimbel/Development/github/emsdk/emscripten/1.38.5"
+
+export EMSDK="/Users/kevingimbel/Development/github/emsdk"
+export EM_CONFIG="/Users/kevingimbel/.emscripten"
+export LLVM_ROOT="/Users/kevingimbel/Development/github/emsdk/clang/e1.38.5_64bit"
+export EMSCRIPTEN_NATIVE_OPTIMIZER="/Users/kevingimbel/Development/github/emsdk/clang/e1.38.5_64bit/optimizer"
+export BINARYEN_ROOT="/Users/kevingimbel/Development/github/emsdk/clang/e1.38.5_64bit/binaryen"
+export EMSDK_NODE="/Users/kevingimbel/Development/github/emsdk/node/8.9.1_64bit/bin/node"
+export EMSCRIPTEN="/Users/kevingimbel/Development/github/emsdk/emscripten/1.38.5"
+
+export PATH="/usr/local/opt/gnu-getopt/bin:$PATH"
+
+# Get ansible boilerplate
+alias ansible-init='git clone --depth=1 https://github.com/synoa/ansible-boilerplate.git . && yes | rm -r .git'
+alias ansible-update-roles="cd /Users/kevingimbel/Development/synoa/ansible/ansible.modules && ./update_roles.sh && cd -"
+
+## SSH via mssh
+alias lg="ls -ahlrt | grep"
