@@ -28,9 +28,13 @@ function ws() {
   depth=${WS_DEPTH:=3}
   # We start searching from the workspace dir
   cd $workspace
-  # -maxdepth is the max directories to go "down"
-  # head -n1 gives back the first result
-  workspace_path=$(find . -maxdepth $depth -type d -name "*$target_dir*" | head -n1)
+  # Use fd if available which is a lot faster than find.
+  # See https://github.com/sharkdp/fd
+  if [ -x "$(command -v fd)" ]; then
+    workspace_path=$(find . -maxdepth $depth -type d -name "*$target_dir*" | head -n1)
+  else
+    workspace_path=$(fd -t d "$target_dir" | head -n1)
+  fi
   if [  -z "$workspace_path" ]; then
     echo "Directory '$target_dir' not found. Changing to $workspace"
   else
@@ -65,31 +69,12 @@ function git-remove-merged() {
 
 export BASH_IT="$HOME/.bash_it"
 
-GO111MODULE=on
-
 # custom function for powerline
-source ~/.bash_it_custom/powerline-multiline/custom-prompt-funcs.sh
+# source ~/.bash_it_custom/powerline-multiline/custom-prompt-funcs.sh
 # Lock and Load a custom theme file.
 # Leave empty to disable theming.
 # location /.bash_it/themes/
-export BASH_IT_THEME='powerline-multiline'
-
-if [ "$TERM_PROGRAM" = "iTerm.app" ]; then
-  export PS1_KUBECTL=1
-  export POWERLINE_LEFT_PROMPT="clock aws_profile kubectl_context python_venv"
-  export POWERLINE_RIGHT_PROMPT=
-else
-  export POWERLINE_LEFT_PROMPT="scm cwd_short"
-  export POWERLINE_RIGHT_PROMPT=""
-fi
-
-export POWERLINE_PROMPT_CHAR="λ"
-# (Advanced): Change this to the name of your remote repo if you
-# cloned bash-it with a remote other than origin such as `bash-it`.
-# export BASH_IT_REMOTE='bash-it'
-
-# Your place for hosting Git repos. I use this for private repos.
-# export GIT_HOSTING='git@git.domain.com'
+export BASH_IT_THEME='/Users/kevingimbel/.bash_it_custom/kgt/kgt.theme.bash'
 
 # Don't check mail when opening terminal.
 unset MAILCHECK
@@ -130,3 +115,7 @@ export SCM_CHECK=true
 
 # Load Bash It
 source "$BASH_IT"/bash_it.sh
+
+export WASMTIME_HOME="$HOME/.wasmtime"
+
+export PATH="$WASMTIME_HOME/bin:$PATH"

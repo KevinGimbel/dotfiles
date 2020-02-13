@@ -1,0 +1,10 @@
+# NVM
+source $(brew --prefix nvm)/nvm.sh
+
+# Node Settings
+export NODE_PATH="$(npm get prefix)/lib/node-modules"
+
+
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+    source $(brew --prefix)/etc/bash_completion
+fi
