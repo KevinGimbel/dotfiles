@@ -31,9 +31,9 @@ function ws() {
   # Use fd if available which is a lot faster than find.
   # See https://github.com/sharkdp/fd
   if [ -x "$(command -v fd)" ]; then
-    workspace_path=$(find . -maxdepth $depth -type d -name "*$target_dir*" | head -n1)
-  else
     workspace_path=$(fd -t d "$target_dir" | head -n1)
+  else
+    workspace_path=$(find . -maxdepth $depth -type d -name "*$target_dir*" | head -n1)
   fi
   if [  -z "$workspace_path" ]; then
     echo "Directory '$target_dir' not found. Changing to $workspace"
